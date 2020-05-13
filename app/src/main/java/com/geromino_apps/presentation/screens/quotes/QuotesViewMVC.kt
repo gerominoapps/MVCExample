@@ -16,5 +16,6 @@ interface QuotesViewMVC : ObservableViewMVC<QuotesViewMVC.Listener>{
     fun quoteAdded()
     fun setProgressBarVisibility(isVisible : Boolean)
     fun setEmptyStateVisibility(isVisible: Boolean)
+    fun isAdapterIsEmpty() : Boolean
 
 }

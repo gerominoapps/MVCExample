@@ -86,7 +86,12 @@ class QuotesActivity : BaseActivity(), QuotesViewMVC.Listener {
                 mQuotesInteractor.storeQuotes(quoteList)
                 withContext(Dispatchers.Main){
                     mViewModel.quotes.add(0, quoteEntity)
-                    mViewMVC.quoteAdded()
+                    if(mViewMVC.isAdapterIsEmpty()){
+                        mViewMVC.bindQuotes(mViewModel.quotes, mViewMvcFactory)
+                        mViewMVC.setEmptyStateVisibility(false)
+                    } else {
+                        mViewMVC.quoteAdded()
+                    }
                     mViewMVC.clearAuthorEditText()
                     mViewMVC.clearQuoteEditText()
                 }

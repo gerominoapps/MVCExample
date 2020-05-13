@@ -60,7 +60,11 @@ class QuotesViewMVCImpl(inflater: LayoutInflater, @Nullable parent: ViewGroup?) 
 
     override fun quoteAdded() {
         mRv.scrollToPosition(0)
-        mAdapter?.notifyItemInserted(0)
+        if(mAdapter?.itemCount == 0){
+            mAdapter?.notifyDataSetChanged()
+        } else {
+            mAdapter?.notifyItemInserted(0)
+        }
     }
 
     override fun setProgressBarVisibility(isVisible: Boolean) {
@@ -69,5 +73,9 @@ class QuotesViewMVCImpl(inflater: LayoutInflater, @Nullable parent: ViewGroup?) 
 
     override fun setEmptyStateVisibility(isVisible: Boolean) {
         mEmptyStateMessage.visibility  = if(isVisible) View.VISIBLE else View.INVISIBLE
+    }
+
+    override fun isAdapterIsEmpty(): Boolean {
+        return mAdapter?.let { it.itemCount > 0}?:true
     }
 }
